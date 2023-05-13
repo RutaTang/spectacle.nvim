@@ -32,5 +32,16 @@ require("lazy").setup({
 | `SpectacleLoad()`     | Load session             |
 |  `SpectacleList()`    |     List all saved session        |
 | `SpectacleRename()` | Rename session |
-| `Spectacletelescope()` | Open a telescope picker to pick an avaible session | 
+| `SpectacleTelescope()` | Open a telescope picker to pick an avaible session | 
 
+For example, you can call `SpectacleTelescope` like this:
+
+```lua
+:lua require('spectacle').SpectacleTelescope()
+```
+
+You can also set a keymap to conviniently call the function like this:
+
+```lua
+vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>:lua require('spectacle').SpectacleTelescope()<cr>",{})
+```
