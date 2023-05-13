@@ -1,4 +1,9 @@
 local util = require("spectacle.util")
+local actions = require("telescope.actions")
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local action_state = require("telescope.actions.state")
+local conf = require("telescope.config").values
 
 local M = {}
 
@@ -32,18 +37,17 @@ M.SpectacleSave = SpectacleSave
 
 local SpectacleList = function()
     local files = util.list_files_in_dir(".spectacle")
+    if #files == 0 then
+        print("No sessions found")
+        return
+    end
     for i, file in ipairs(files) do
         print(i .. ":", util.get_file_basename(file))
     end
 end
 M.SpectacleList = SpectacleList
 
-local SpectacleLoad = function()
-    local session_name = vim.fn.input("Session name: ")
-    if session_name == "" then
-        print("Session name cannot be empty")
-        return
-    end
+local _load_session = function(session_name)
     local p = ".spectacle/" .. session_name .. ".vim"
     local session_exists = util.check_if_file_exists(p)
     if not session_exists then
@@ -51,6 +55,15 @@ local SpectacleLoad = function()
         return
     end
     vim.cmd("source " .. p)
+end
+
+local SpectacleLoad = function()
+    local session_name = vim.fn.input("Session name: ")
+    if session_name == "" then
+        print("Session name cannot be empty")
+        return
+    end
+    _load_session(session_name)
     -- Update loadFrom
     loadFrom = session_name
 end
@@ -79,5 +92,40 @@ local SpectacleRename = function()
     loadFrom = new_name
 end
 M.SpectacleRename = SpectacleRename
+
+local SpectacleTelescope = function()
+    -- get all session names
+    local files = util.list_files_in_dir(".spectacle")
+    local results = {}
+    for _, file in ipairs(files) do
+        table.insert(results, util.get_file_basename(file))
+    end
+    -- create telescope picker
+    local sessions = function(opts)
+        opts = opts or {}
+        pickers
+            .new(opts, {
+                prompt_title = "Sessions",
+                finder = finders.new_table({
+                    results = results,
+                }),
+                sorter = conf.generic_sorter(opts),
+                attach_mappings = function(prompt_bufnr, map)
+                    local load_session_map = function()
+                        local selection = action_state.get_selected_entry()
+                        actions.close(prompt_bufnr)
+                        _load_session(selection.value)
+                    end
+                    map("n", "<CR>", load_session_map)
+                    map("i", "<CR>", function()
+                    end)
+                    return true
+                end,
+            })
+            :find()
+    end
+    sessions(require("telescope.themes").get_dropdown({}))
+end
+M.SpectacleTelescope = SpectacleTelescope
 
 return M

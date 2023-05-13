@@ -12,4 +12,5 @@ return {
     SpectacleLoad = core.SpectacleLoad,
     SpectacleList = core.SpectacleList,
     SpectacleRename = core.SpectacleRename,
+    SpectacleTelescope = core.SpectacleTelescope,
 }

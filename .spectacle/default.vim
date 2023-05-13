@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle
+cd ~/Coding/NeovimPlugins/spectacle.nvim
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,10 +13,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/init.lua
+badd +0 ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/core/init.lua
 argglobal
 %argdel
-edit ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/init.lua
+edit ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/core/init.lua
 argglobal
 setlocal fdm=indent
 setlocal fde=0
