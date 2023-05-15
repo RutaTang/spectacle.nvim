@@ -27,7 +27,7 @@ require("lazy").setup({
 | API | Description |
 |-----|-------------|
 |  `SpectacleSave()`   |      Save session       |
-| `SpectacleSaveAs()`     | Load session             |
+| `SpectacleSaveAs()`     | Save current session as a new session             |
 | `SpectacleTelescope()` | Open a telescope picker to manage sessions, you can press `<CR>` to select a session, `r` to rename a session, and `d` to delete a session, (Be sure you are in normal mode)| 
 
 For example, you can call `SpectacleTelescope` like this:
