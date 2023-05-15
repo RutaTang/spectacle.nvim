@@ -1,5 +1,4 @@
 local Path = require("plenary.path")
-local async = require("plenary.async")
 
 local M = {}
 

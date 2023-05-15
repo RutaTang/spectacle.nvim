@@ -56,6 +56,8 @@ local SpectacleSaveAs = function()
     -- print success message
     vim.cmd([[echo "\n"]])
     print("New Session created and saved as " .. session_name)
+    -- update loadFrom
+    loadFrom = session_name
 end
 M.SpectacleSaveAs = SpectacleSaveAs
 
