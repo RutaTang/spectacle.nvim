@@ -5,7 +5,7 @@ The plugin is designed for working with mutiple sessions. With it, you can easil
 
 ## Installnation
 
-Useing any plugin you like, here is how to use with lazy.nvim plugin manager:
+Useing any plugin manager you like, here is how to use with lazy.nvim plugin manager:
 
 ```lua
 require("lazy").setup({
