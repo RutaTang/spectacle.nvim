@@ -31,21 +31,33 @@ local SpectacleSave = function()
         vim.cmd("mksession! " .. p)
         -- update loadFrom
         loadFrom = session_name
+
+        vim.cmd([[echo "\n"]])
     end
+    -- print success message
+    vim.cmd([[echo ""]])
+    print("Session " .. loadFrom .. " saved")
 end
 M.SpectacleSave = SpectacleSave
 
-local SpectacleList = function()
-    local files = util.list_files_in_dir(".spectacle")
-    if #files == 0 then
-        print("No sessions found")
+local SpectacleSaveAs = function()
+    local session_name = vim.fn.input("Session name: ")
+    if session_name == "" then
+        print("Session name cannot be empty")
         return
     end
-    for i, file in ipairs(files) do
-        print(i .. ":", util.get_file_basename(file))
+    local p = ".spectacle/" .. session_name .. ".vim"
+    local session_exists = util.check_if_file_exists(p)
+    if session_exists then
+        print("Session name already exists")
+        return
     end
+    vim.cmd("mksession! " .. p)
+    -- print success message
+    vim.cmd([[echo "\n"]])
+    print("New Session created and saved as " .. session_name)
 end
-M.SpectacleList = SpectacleList
+M.SpectacleSaveAs = SpectacleSaveAs
 
 local _load_session = function(session_name)
     local p = ".spectacle/" .. session_name .. ".vim"
@@ -55,31 +67,17 @@ local _load_session = function(session_name)
         return
     end
     vim.cmd("source " .. p)
-end
-
-local SpectacleLoad = function()
-    local session_name = vim.fn.input("Session name: ")
-    if session_name == "" then
-        print("Session name cannot be empty")
-        return
-    end
-    _load_session(session_name)
     -- Update loadFrom
     loadFrom = session_name
 end
-M.SpectacleLoad = SpectacleLoad
 
-local SpectacleRename = function()
-    if loadFrom == "" then
-        print("No session loaded")
-        return
-    end
+local _rename_session = function(seesion_name)
     local new_name = vim.fn.input("New name: ")
     if new_name == "" then
         print("Session name cannot be empty")
         return
     end
-    local old_path = ".spectacle/" .. loadFrom .. ".vim"
+    local old_path = ".spectacle/" .. seesion_name .. ".vim"
     local new_path = ".spectacle/" .. new_name .. ".vim"
     local session_exists = util.check_if_file_exists(new_path)
     if session_exists then
@@ -88,10 +86,14 @@ local SpectacleRename = function()
     end
     -- rename session
     vim.loop.fs_rename(old_path, new_path)
+    -- print success message
+    vim.cmd([[echo "\n"]])
+    print("Session " .. seesion_name .. " renamed to " .. new_name)
     -- update loadFrom
-    loadFrom = new_name
+    if loadFrom == seesion_name then
+        loadFrom = new_name
+    end
 end
-M.SpectacleRename = SpectacleRename
 
 local SpectacleTelescope = function()
     -- get all session names
@@ -111,12 +113,36 @@ local SpectacleTelescope = function()
                 }),
                 sorter = conf.generic_sorter(opts),
                 attach_mappings = function(prompt_bufnr, map)
-                    local load_session_map = function()
+                    -- load session on enter
+                    map("n", "<CR>", function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
                         _load_session(selection.value)
-                    end
-                    map("n", "<CR>", load_session_map)
+                    end)
+                    -- delete session on d
+                    map("n", "d", function()
+                        local selection = action_state.get_selected_entry()
+                        actions.close(prompt_bufnr)
+                        if loadFrom == selection.value then
+                            loadFrom = ""
+                        end
+                        local p = ".spectacle/" .. selection.value .. ".vim"
+                        local confirm = vim.fn.input("Delete " .. selection.value .. "? (y/N): ")
+                        if confirm ~= "y" then
+                            vim.cmd([[echo ""]])
+                            return
+                        end
+                        vim.loop.fs_unlink(p)
+                        vim.cmd([[echo "\n"]])
+                        print("Session deleted")
+                    end)
+                    -- rename session on r
+                    map("n", "r", function()
+                        local selection = action_state.get_selected_entry()
+                        actions.close(prompt_bufnr)
+                        _rename_session(selection.value)
+                    end)
+                    -- no action on enter in insert mode
                     map("i", "<CR>", function()
                     end)
                     return true

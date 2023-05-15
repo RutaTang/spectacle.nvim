@@ -1,8 +1,6 @@
 # Spectacle.nvim
 
-The plugin is designed for working with mutiple sessions. With it, you can easily store and change your session.
-
-In addition, it also supports the integration with telescope.nvim.
+The plugin is designed for working with mutiple sessions. With it, you can easily store and change your session. This plugin is closly integrated with telescope.nvim, so please make sure telescope.nvim is in your dependencies.
 
 
 ## Installnation
@@ -29,10 +27,8 @@ require("lazy").setup({
 | API | Description |
 |-----|-------------|
 |  `SpectacleSave()`   |      Save session       |
-| `SpectacleLoad()`     | Load session             |
-|  `SpectacleList()`    |     List all saved session        |
-| `SpectacleRename()` | Rename session |
-| `SpectacleTelescope()` | Open a telescope picker to pick an avaible session | 
+| `SpectacleSaveAs()`     | Load session             |
+| `SpectacleTelescope()` | Open a telescope picker to manage sessions, you can press `<CR>` to select a session, `r` to rename a session, and `d` to delete a session, (Be sure you are in normal mode)| 
 
 For example, you can call `SpectacleTelescope` like this:
 

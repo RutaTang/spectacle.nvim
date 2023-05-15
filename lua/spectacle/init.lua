@@ -9,8 +9,7 @@ end
 return {
     setup = setup,
     SpectacleSave = core.SpectacleSave,
-    SpectacleLoad = core.SpectacleLoad,
-    SpectacleList = core.SpectacleList,
+    SpectacleSaveAs = core.SpectacleSaveAs,
     SpectacleRename = core.SpectacleRename,
     SpectacleTelescope = core.SpectacleTelescope,
 }

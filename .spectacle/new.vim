@@ -13,10 +13,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +33 ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/core/init.lua
+badd +0 ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/init.lua
 argglobal
 %argdel
-edit ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/core/init.lua
+edit ~/Coding/NeovimPlugins/spectacle.nvim/lua/spectacle/init.lua
 argglobal
 setlocal fdm=indent
 setlocal fde=0
@@ -26,11 +26,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 33 - ((32 * winheight(0) + 26) / 52)
+let s:l = 4 - ((3 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 33
+keepjumps 4
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
