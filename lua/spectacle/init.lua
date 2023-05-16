@@ -10,6 +10,5 @@ return {
     setup = setup,
     SpectacleSave = core.SpectacleSave,
     SpectacleSaveAs = core.SpectacleSaveAs,
-    SpectacleRename = core.SpectacleRename,
     SpectacleTelescope = core.SpectacleTelescope,
 }
