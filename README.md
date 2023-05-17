@@ -7,6 +7,10 @@
 
 The plugin is designed for working with mutiple sessions. With it, you can easily store and change your session. This plugin is closly integrated with telescope.nvim, so please make sure telescope.nvim is in your dependencies.
 
+<div class="center">
+<img src="./art/showcase.gif" alt="Showcase"/>
+</div>
+
 
 ## Installnation
 
