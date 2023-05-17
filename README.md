@@ -41,3 +41,8 @@ You can also set a keymap to conviniently call the function like this:
 ```lua
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>:lua require('spectacle').SpectacleTelescope()<cr>",{})
 ```
+
+## How it works
+
+It simply saves the session content generated from command ":mksession" to a folder named ".spectacle" stored in current working directory. The session file stored in '.spectacle' folder stands for a single session. Its name is the session name. For example, conisder you create a session named "default", its session file "default.vim" will be stored in '.spectacle'.
+
