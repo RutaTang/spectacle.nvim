@@ -12,7 +12,7 @@ require("lazy").setup({
   { 
     "RutaTang/spectacle.nvim",
     config = function()
-        require("spectacle").setup()
+        require("spectacle").setup{}
     end,
     dependencies = {
         'nvim-lua/plenary.nvim',
@@ -30,7 +30,7 @@ require("lazy").setup({
 | `SpectacleSaveAs()`     | Save current session as a new session             |
 | `SpectacleTelescope()` | Open a telescope picker to manage sessions, you can press `<CR>` to select a session, `r` to rename a session, and `d` to delete a session, (Be sure you are in normal mode)| 
 
-For example, you can call `SpectacleTelescope` like this:
+For example, you can call `SpectacleTelescope()` API like this:
 
 ```lua
 :lua require('spectacle').SpectacleTelescope()
