@@ -1,5 +1,10 @@
 # Spectacle.nvim
 
+<p align="center">
+<a href="./i18n/zh.md">[简体中文]</a>
+<a href="./i18n/fr.md">[Français]</a>
+</p>
+
 The plugin is designed for working with mutiple sessions. With it, you can easily store and change your session. This plugin is closly integrated with telescope.nvim, so please make sure telescope.nvim is in your dependencies.
 
 
