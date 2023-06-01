@@ -2,7 +2,7 @@ local core = require("spectacle.core")
 local util = require("spectacle.util")
 
 local setup = function(opts)
-    -- init session fodler
+    -- init session folder
     util.create_dir_if_not_exists(".spectacle")
 end
 
