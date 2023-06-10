@@ -20,6 +20,7 @@ local SpectacleSave = function()
             print("Session name cannot be empty")
             return
         end
+        util.create_dir_if_not_exists(".spectacle")
         -- form session file path
         local p = ".spectacle/" .. session_name .. ".vim"
         -- check if session name already exists
@@ -46,6 +47,7 @@ local SpectacleSaveAs = function()
         print("Session name cannot be empty")
         return
     end
+    util.create_dir_if_not_exists(".spectacle")
     local p = ".spectacle/" .. session_name .. ".vim"
     local session_exists = util.check_if_file_exists(p)
     if session_exists then
