@@ -20,9 +20,6 @@ Using any plugin manager you like, here is how to use with lazy.nvim plugin mana
 require("lazy").setup({
   { 
     "RutaTang/spectacle.nvim",
-    config = function()
-        require("spectacle").setup{}
-    end,
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope.nvim'
