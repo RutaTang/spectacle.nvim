@@ -30,7 +30,7 @@ require("lazy").setup({
 
 ## Configuration
 
-So far only Configuration is to provide the path of the directory where your want to save all your session via passing **session_dir** in **opts**, otherwise leave it as blank table i.e. **opts = {}**, and it will save all the session into directory ".spectacle" at the current working directory of the working file.
+So far only Configuration is to provide the path of the directory where your want to save all your session via passing ```session_dir``` in ```opts```, otherwise leave it as blank table i.e. ```opts = {}```, and it will save all the session into directory **.spectacle** at the current working directory of the working file.
 
 ## API
 
