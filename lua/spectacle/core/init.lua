@@ -32,7 +32,7 @@ local SpectacleSave = function()
 			print("Session name cannot be empty")
 			return
 		end
-		util.create_dir_if_not_exists(".spectacle")
+		util.create_dir_if_not_exists(session_dir)
 		-- form session file path
 		local p = session_dir .. session_name .. ".vim"
 		-- check if session name already exists
@@ -59,7 +59,7 @@ local SpectacleSaveAs = function()
 		print("Session name cannot be empty")
 		return
 	end
-	util.create_dir_if_not_exists(".spectacle")
+	util.create_dir_if_not_exists(session_dir)
 	local p = session_dir .. session_name .. ".vim"
 	local session_exists = util.check_if_file_exists(p)
 	if session_exists then
@@ -113,7 +113,7 @@ end
 
 local SpectacleTelescope = function()
 	-- get all session names
-	local files = util.list_files_in_dir(".spectacle")
+	local files = util.list_files_in_dir(session_dir)
 	local results = {}
 	for _, file in ipairs(files) do
 		table.insert(results, util.get_file_basename(file))
