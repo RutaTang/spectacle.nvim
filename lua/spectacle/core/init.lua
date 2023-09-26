@@ -17,7 +17,6 @@ local setup = function(opts)
 	else
 		session_dir = ".spectacle/"
 	end
-  print(session_dir)
 end
 M.setup = setup
 
